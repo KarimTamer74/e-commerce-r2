@@ -2,7 +2,8 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:e_commerce_app/widgets/custom_product_item.dart';
+import 'package:e_commerce_app/screens/filter_products_by_category.dart';
+import 'package:e_commerce_app/widgets/products_grid_view.dart';
 import 'package:flutter/material.dart';
 
 class ProductsScreen extends StatefulWidget {
@@ -17,7 +18,6 @@ class _ProductsScreenState extends State<ProductsScreen> {
   final dio = Dio();
   @override
   void initState() {
-    getAllProducts();
     getAllCategories();
     super.initState();
   }
@@ -44,18 +44,28 @@ class _ProductsScreenState extends State<ProductsScreen> {
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: Container(
-                      width: 100,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.teal),
-                      ),
-                      child: Center(
-                        child: Text(
-                          categories[index]['name'],
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FilterProductsByCategory(categoryName: categories[index]['name'] ),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        width: 100,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.teal),
+                        ),
+                        child: Center(
+                          child: Text(
+                            categories[index]['name'],
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ),
                       ),
@@ -67,20 +77,21 @@ class _ProductsScreenState extends State<ProductsScreen> {
             SizedBox(height: 40),
             Expanded(
               flex: 10,
-              child: GridView.builder(
-                itemCount: products.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 15,
-                  childAspectRatio: .7,
-                  crossAxisCount: 2,
-                ),
-                itemBuilder: (context, index) {
-                  return CustomProductItem(
-                    title: products[index]['title']!,
-                    price: products[index]['price']!.toString(),
-                    image: products[index]['thumbnail']!,
-                  );
+              child: FutureBuilder(
+                future: getAllProducts(),
+                builder: (context, snapShot) {
+                  if (snapShot.hasData) {
+                    return snapShot.data!.isEmpty
+                        ? Text("No products")
+                        : ProductsGridView(products: products);
+                  } else if (snapShot.connectionState ==
+                      ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                  } else if (snapShot.hasError) {
+                    return Text("Error");
+                  } else {
+                    return SizedBox.shrink();
+                  }
                 },
               ),
             ),
@@ -90,15 +101,17 @@ class _ProductsScreenState extends State<ProductsScreen> {
     );
   }
 
-  Future<void> getAllProducts() async {
+  Future<List<dynamic>> getAllProducts() async {
     try {
       Response response = await dio.get('https://dummyjson.com/products');
       Map<String, dynamic> data = response.data;
       products = data['products'];
       // log("Products: $products");
       setState(() {});
+      return products;
     } catch (e) {
       log("Error: $e");
+      return [];
     }
   }
 
@@ -109,7 +122,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
 
     categories = response.data;
     setState(() {});
-    log('Categories: $categories');
+    // log('Categories: $categories');
   }
 }
 //* 1- Model

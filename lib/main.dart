@@ -1,4 +1,5 @@
 // main.dart
+import 'package:e_commerce_app/screens/filter_products_by_category.dart';
 import 'package:e_commerce_app/screens/products_screen.dart';
 import 'package:e_commerce_app/screens/sign_up_screen.dart';
 import 'package:flutter/material.dart';
@@ -13,10 +14,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       routes: {
-        '/product_screen': (context) => ProductsScreen(),
         '/sign_up': (context) => SignUpScreen(),
+        '/products_screen': (context) => ProductsScreen(),
+        '/filter_products_by_category': (context) => FilterProductsByCategory(categoryName: '',),
       },
-      initialRoute: '/sign_up',
+      initialRoute: '/products_screen',
       debugShowCheckedModeBanner: false,
       title: 'E-Commerce',
     );
