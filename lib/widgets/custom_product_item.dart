@@ -1,15 +1,11 @@
 // widgets/custom_product_item.dart
+import 'package:e_commerce_app/models/product_model.dart';
+import 'package:e_commerce_app/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomProductItem extends StatefulWidget {
-  const CustomProductItem({
-    super.key,
-    required this.title,
-    required this.price,
-    required this.image,
-  });
-  final String title, price, image;
-
+  const CustomProductItem({super.key, required this.product});
+  final Product product;
   @override
   State<CustomProductItem> createState() => _CustomProductItemState();
 }
@@ -20,13 +16,12 @@ class _CustomProductItemState extends State<CustomProductItem> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) =>
-        //         ProductDetailsScreen(product: ),
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ProductDetailsScreen(product: widget.product),
+          ),
+        );
       },
       child: Container(
         width: 144,
@@ -45,7 +40,7 @@ class _CustomProductItemState extends State<CustomProductItem> {
                     topRight: Radius.circular(15),
                   ),
                   child: Image.network(
-                    widget.image,
+                    widget.product.image,
                     height: 134,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -76,7 +71,7 @@ class _CustomProductItemState extends State<CustomProductItem> {
                   Column(
                     children: [
                       Text(
-                        widget.title,
+                        widget.product.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: TextStyle(
@@ -85,7 +80,17 @@ class _CustomProductItemState extends State<CustomProductItem> {
                         ),
                       ),
                       Text(
-                        '\$ ${widget.price}',
+                        widget.product.desc ?? 'No Desc',
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.grey,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Text(
+                        '\$ ${widget.product.price}',
                         style: TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600,

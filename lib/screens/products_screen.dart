@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:e_commerce_app/models/product_model.dart';
 import 'package:e_commerce_app/screens/filter_products_by_category.dart';
 import 'package:e_commerce_app/widgets/products_grid_view.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class ProductsScreen extends StatefulWidget {
 }
 
 class _ProductsScreenState extends State<ProductsScreen> {
-  List<dynamic> products = [];
+  List<Product> products = [];
   List<dynamic> categories = [];
   final dio = Dio();
   @override
@@ -49,7 +50,9 @@ class _ProductsScreenState extends State<ProductsScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => FilterProductsByCategory(categoryName: categories[index]['name'] ),
+                            builder: (context) => FilterProductsByCategory(
+                              categoryName: categories[index]['name'],
+                            ),
                           ),
                         );
                       },
@@ -83,7 +86,7 @@ class _ProductsScreenState extends State<ProductsScreen> {
                   if (snapShot.hasData) {
                     return snapShot.data!.isEmpty
                         ? Text("No products")
-                        : ProductsGridView(products: products);
+                        : ProductsGridView(products: products,);
                   } else if (snapShot.connectionState ==
                       ConnectionState.waiting) {
                     return Center(child: CircularProgressIndicator());
@@ -101,11 +104,18 @@ class _ProductsScreenState extends State<ProductsScreen> {
     );
   }
 
-  Future<List<dynamic>> getAllProducts() async {
+  //* data['products'] => [{},{},{}] in api
+  //* element => {} , {}
+  //* elment (map) to model
+  Future<List<Product>> getAllProducts() async {
     try {
       Response response = await dio.get('https://dummyjson.com/products');
       Map<String, dynamic> data = response.data;
-      products = data['products'];
+
+      for (var element in data['products']) {
+        Product model = Product.fromJson(element);
+        products.add(model);
+      }
       // log("Products: $products");
       setState(() {});
       return products;

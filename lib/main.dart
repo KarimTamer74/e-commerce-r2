@@ -25,23 +25,10 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//* 1- Grid View 
+//* 2- custom item (product data)
+//* 3- model
+//* 4- api request
+//* 5- convert data from api to your model using fromJson
+//* 6- pass data in model to custom item
 
-
-//* apis (products & categories)
-//* from json
-
-
-
-
-
-
-
-
-
-
-
-
-//* Sign Up
-//* Navigation
-//* Listview & GridView
-//* App Ui

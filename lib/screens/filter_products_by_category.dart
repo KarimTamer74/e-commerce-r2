@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:e_commerce_app/models/product_model.dart';
 import 'package:e_commerce_app/widgets/products_grid_view.dart';
 import 'package:flutter/material.dart';
 
@@ -15,13 +16,16 @@ class FilterProductsByCategory extends StatefulWidget {
 
 class _FilterProductsByCategoryState extends State<FilterProductsByCategory> {
   Dio dio = Dio();
-  List products = [];
+  List<Product> products = [];
   Future<List<dynamic>> filterProductsByCategory() async {
     Response response = await dio.get(
       'https://dummyjson.com/products/category/${widget.categoryName}',
     );
     Map<String, dynamic> data = response.data;
-    products = data["products"];
+    for (var element in data['products']) {
+      Product model = Product.fromJson(element);
+      products.add(model);
+    }
 
     log('products: $products');
     setState(() {});

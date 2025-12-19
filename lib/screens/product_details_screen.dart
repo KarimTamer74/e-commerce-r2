@@ -26,7 +26,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         topLeft: Radius.circular(24),
                         topRight: Radius.circular(24),
                       ),
-                      child: Image.asset(product.image, fit: BoxFit.cover),
+                      child: Image.network(product.image, fit: BoxFit.cover),
                     ),
                     // subtle gradient to improve contrast
                     Container(
@@ -99,7 +99,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               ),
                               SizedBox(height: 6),
                               Text(
-                                'Comfortable • Wooden • Modern',
+                                product.desc ?? 'No Desc',
                                 style: TextStyle(
                                   fontSize: 13,
                                   color: Colors.grey,
