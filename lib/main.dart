@@ -16,9 +16,10 @@ class MyApp extends StatelessWidget {
       routes: {
         '/sign_up': (context) => SignUpScreen(),
         '/products_screen': (context) => ProductsScreen(),
-        '/filter_products_by_category': (context) => FilterProductsByCategory(categoryName: '',),
+        '/filter_products_by_category': (context) =>
+            FilterProductsByCategory(categoryName: ''),
       },
-      initialRoute: '/products_screen',
+      initialRoute: '/sign_up',
       debugShowCheckedModeBanner: false,
       title: 'E-Commerce',
     );
