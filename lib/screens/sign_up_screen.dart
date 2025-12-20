@@ -2,6 +2,7 @@
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
+import 'package:e_commerce_app/models/user_info_model.dart';
 import 'package:e_commerce_app/validators.dart';
 import 'package:e_commerce_app/widgets/custom_text_form_field_with_title.dart';
 import 'package:flutter/material.dart';
@@ -34,14 +35,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final Dio dio = Dio();
   Future<void> register() async {
     try {
+      final user = UserInfoModel(
+        email: emailController.text,
+        password: passwordController.text,
+        firstName: firstName.text,
+        lastName: lastName.text,
+      );
+      log('User: ${user.toJson()}');
       Response response = await dio.post(
         'https://accessories-eshop.runasp.net/api/auth/register',
-        data: {
-          "email": emailController.text,
-          "password": passwordController.text,
-          "firstName": firstName.text,
-          "lastName": lastName.text,
-        },
+        data: user.toJson(),
       );
       log("Response: $response");
     } on DioException catch (e) {
@@ -168,11 +171,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                     onPressed: () async {
                       if (key.currentState!.validate()) {
-                        log("Email: ${emailController.text}");
-                        log("First Name: ${firstName.text}");
-                        log("Last Name: ${lastName.text}");
-                        log("Password: ${passwordController.text}");
-                        log("============");
                         await register();
 
                         // Navigator.of(
