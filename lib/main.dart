@@ -1,4 +1,5 @@
 // main.dart
+import 'package:e_commerce_app/screens/add_product_screen.dart';
 import 'package:e_commerce_app/screens/filter_products_by_category.dart';
 import 'package:e_commerce_app/screens/products_screen.dart';
 import 'package:e_commerce_app/screens/sign_up_screen.dart';
@@ -18,8 +19,9 @@ class MyApp extends StatelessWidget {
         '/products_screen': (context) => ProductsScreen(),
         '/filter_products_by_category': (context) =>
             FilterProductsByCategory(categoryName: ''),
+        '/add_product_screen': (context) => AddProductScreen(),
       },
-      initialRoute: '/sign_up',
+      initialRoute: '/products_screen',
       debugShowCheckedModeBanner: false,
       title: 'E-Commerce',
     );
