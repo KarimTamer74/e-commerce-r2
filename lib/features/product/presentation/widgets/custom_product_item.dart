@@ -1,9 +1,9 @@
-// widgets/custom_product_item.dart
+// features/product/presentation/widgets/custom_product_item.dart
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:e_commerce_app/models/product_model.dart';
-import 'package:e_commerce_app/screens/product_details_screen.dart';
+import 'package:e_commerce_app/features/product/data/models/product_model.dart';
+import 'package:e_commerce_app/features/product/presentation/screens/product_details_screen.dart';
 import 'package:flutter/material.dart';
 
 class CustomProductItem extends StatefulWidget {

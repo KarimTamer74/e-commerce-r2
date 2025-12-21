@@ -1,9 +1,9 @@
-// screens/filter_products_by_category.dart
+// features/product/presentation/screens/filter_products_by_category.dart
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:e_commerce_app/models/product_model.dart';
-import 'package:e_commerce_app/widgets/products_grid_view.dart';
+import 'package:e_commerce_app/features/product/data/models/product_model.dart';
+import 'package:e_commerce_app/features/product/presentation/widgets/products_grid_view.dart';
 import 'package:flutter/material.dart';
 
 class FilterProductsByCategory extends StatefulWidget {

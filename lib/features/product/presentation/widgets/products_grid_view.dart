@@ -1,6 +1,6 @@
-// widgets/products_grid_view.dart
-import 'package:e_commerce_app/models/product_model.dart';
-import 'package:e_commerce_app/widgets/custom_product_item.dart';
+// features/product/presentation/widgets/products_grid_view.dart
+import 'package:e_commerce_app/features/product/data/models/product_model.dart';
+import 'package:e_commerce_app/features/product/presentation/widgets/custom_product_item.dart';
 import 'package:flutter/material.dart';
 
 class ProductsGridView extends StatefulWidget {

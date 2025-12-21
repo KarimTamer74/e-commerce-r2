@@ -1,5 +1,5 @@
 // validators.dart
-import 'package:e_commerce_app/string_manager.dart';
+import 'package:e_commerce_app/core/utils/string_manager.dart';
 
 class Validator {
   static String? validateEmail(String email) {

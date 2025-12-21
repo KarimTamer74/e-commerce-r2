@@ -1,10 +1,10 @@
-// screens/sign_up_screen.dart
+// features/auth/presentation/screens/sign_up_screen.dart
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:e_commerce_app/models/user_info_model.dart';
-import 'package:e_commerce_app/validators.dart';
-import 'package:e_commerce_app/widgets/custom_text_form_field_with_title.dart';
+import 'package:e_commerce_app/features/auth/data/models/user_info_model.dart';
+import 'package:e_commerce_app/core/helper/validators.dart';
+import 'package:e_commerce_app/core/shared_widgets/custom_text_form_field_with_title.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 

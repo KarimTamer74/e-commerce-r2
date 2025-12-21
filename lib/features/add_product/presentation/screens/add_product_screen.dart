@@ -1,8 +1,8 @@
-// screens/add_product_screen.dart
+// features/add_product/presentation/screens/add_product_screen.dart
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
-import 'package:e_commerce_app/widgets/custom_text_form_field.dart';
+import 'package:e_commerce_app/core/shared_widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 
 class AddProductScreen extends StatefulWidget {

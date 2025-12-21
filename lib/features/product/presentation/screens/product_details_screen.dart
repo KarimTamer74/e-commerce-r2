@@ -1,5 +1,5 @@
-// screens/product_details_screen.dart
-import 'package:e_commerce_app/models/product_model.dart';
+// features/product/presentation/screens/product_details_screen.dart
+import 'package:e_commerce_app/features/product/data/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
